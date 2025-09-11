@@ -26,8 +26,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     PokedexNavigation(
-                        navController = rememberNavController(),
-                        onClose = { finish() }
+                        navController = rememberNavController()
                     )
                 }
             }

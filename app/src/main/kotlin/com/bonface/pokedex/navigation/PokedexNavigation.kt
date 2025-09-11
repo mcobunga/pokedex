@@ -24,17 +24,21 @@ import com.bonface.pokedex.viewmodel.PokemonViewModel
  */
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun PokedexNavigation(
-    navController: NavHostController,
-    onClose: () -> Unit = {},
-) {
+fun PokedexNavigation(navController: NavHostController) {
     SharedTransitionLayout {
         NavHost(navController = navController, startDestination = NavigationRoutes.Home) {
             composable(route = NavigationRoutes.Home) {
                 val viewModel: PokemonViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+                val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
+                val showSearch  by viewModel.showSearch.collectAsStateWithLifecycle()
+
                 PokemonHomeScreen(
                     uiState = uiState,
+                    searchQuery = searchQuery,
+                    showSearch = showSearch,
+                    onSearchValueChange = viewModel::onSearchQueryChanged,
+                    onShowSearchChange = viewModel::onShowSearchInputChange,
                     navigateToPokemonDetails = { pokemonId ->
                         navController.navigate(NavigationRoutes.details(pokemonId))
                     },
