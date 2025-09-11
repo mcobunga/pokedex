@@ -6,6 +6,14 @@
     <string name="error_text">Something went wrong. Please try again.</string>
     <string name="empty_pokemon">No Pokemon could be found</string>
 
+    <string name="about_pokemon">About %1$s</string>
+    <string name="pokemon_weight">Weight: <b>%1$s</b></string>
+    <string name="pokemon_height">Height: <b>%1$s</b></string>
+    <string name="pokemon_abilities">%1$s Abilities</string>
+    <string name="pokemon_stats">%1$s Stats</string>
+    <string name="stat_value">%1$s (%2$s)</string>
+    <string name="unknown">Unknown</string>
+
     <!--  Error responses  -->
     <string name="no_internet_connection">No internet connection, try again</string>
     <string name="app_update_needed">You need to update the app and try again</string>

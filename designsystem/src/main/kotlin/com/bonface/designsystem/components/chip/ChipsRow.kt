@@ -26,10 +26,10 @@ import com.bonface.designsystem.theme.PokedexTheme
  */
 @Composable
 fun ChipsRow(
+    modifier: Modifier = Modifier,
     chips: List<String>,
     selectedChip: String,
-    onChipSelected: (String) -> Unit,
-    modifier: Modifier = Modifier,
+    onChipSelected: (String) -> Unit = {},
     cornerShape: ChipCornerShape = ChipCornerShapeDefaults.default,
 ) {
     Row(

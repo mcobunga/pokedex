@@ -37,3 +37,6 @@ fun String.formatBold(textsToFormat: List<String>): AnnotatedString {
     }
     return annotatedStringBuilder.toAnnotatedString()
 }
+
+fun String.capitalizeFirst(): String =
+    replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
