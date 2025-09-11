@@ -65,5 +65,6 @@ dependencies {
     api(libs.compose.lottie)
     api(libs.glide)
     api(libs.glide.compose)
+    implementation(libs.coil.compose)
     debugImplementation(libs.compose.ui.tooling)
 }

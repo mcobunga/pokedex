@@ -33,11 +33,17 @@ fun PokedexNavigation(
             composable(route = NavigationRoutes.Home) {
                 val viewModel: PokemonViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                PokemonHomeScreen()
+                PokemonHomeScreen(
+                    uiState = uiState,
+                    navigateToPokemonDetails = { pokemonId ->
+                        navController.navigate(NavigationRoutes.details(pokemonId))
+                    },
+                    onRetry = { viewModel.getPokemon() }
+                )
             }
 
             composable(
-                route = NavigationRoutes.Details,
+                route = NavigationRoutes.DetailsWithArg,
                 arguments = listOf(navArgument("pokemonId") { type = NavType.IntType })
             ) { backStackEntry ->
                 val pokemonId = backStackEntry.arguments?.getInt("pokemonId") ?: return@composable

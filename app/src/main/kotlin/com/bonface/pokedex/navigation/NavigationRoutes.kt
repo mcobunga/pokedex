@@ -4,9 +4,10 @@ import androidx.navigation.NamedNavArgument
 
 object NavigationRoutes {
     const val Home = "home"
-    const val Details = "details/{pokemonId}"
+    const val Details = "details"
+    const val DetailsWithArg = "details/{pokemonId}"
 
-    fun details(pokemonId: Int) = "details/$pokemonId"
+    fun details(pokemonId: Int) = "$Details/$pokemonId"
 }
 
 
