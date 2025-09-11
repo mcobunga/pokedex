@@ -1,8 +1,9 @@
 package com.bonface.pokedex.home
 
 import app.cash.turbine.test
-import com.bonface.consumerapi.domain.Failure
+import com.bonface.consumerapi.mappers.toPokedex
 import com.bonface.consumerapi.repository.PokemonRepository
+import com.bonface.pokedex.helpers.UiText
 import com.bonface.pokedex.utils.BaseTest
 import com.bonface.pokedex.utils.MainDispatcherRule
 import com.bonface.pokedex.utils.TestCreationUtils
@@ -11,6 +12,7 @@ import com.bonface.pokedex.viewmodel.PokemonViewModel
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -72,7 +74,7 @@ class PokemonViewModelTest : BaseTest() {
             val state = awaitItem()
             assert(state is PokemonUiState.Success)
             assertEquals(
-                TestCreationUtils.getPokemon().results,
+                TestCreationUtils.getPokemon().results.map { it.toPokedex() }.toImmutableList(),
                 (state as PokemonUiState.Success).pokemonList
             )
             assertNotNull(viewModel.uiState.value)
@@ -91,10 +93,10 @@ class PokemonViewModelTest : BaseTest() {
         viewModel.uiState.test {
             val state = awaitItem()
             assert(state is PokemonUiState.Error)
-            assertEquals(
-                Failure.Network.ServerError(message = "Server error, resource not available"),
-                (state as PokemonUiState.Error).error
-            )
+
+            val error = (state as PokemonUiState.Error).error
+            assert(error is UiText.DynamicString)
+            assertEquals("Server error, resource not available", (error as UiText.DynamicString).value)
         }
     }
 }
