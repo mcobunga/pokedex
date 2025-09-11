@@ -44,7 +44,7 @@ fun ScreenHeader(
     modifier: Modifier = Modifier,
     title: String? = null,
     titleColor: Color = MaterialTheme.colorScheme.onBackground,
-    leftIconProperties: LeftActionProperties = LeftActionPropertiesDefaults.default(),
+    leftIconProperties: LeftActionProperties? = LeftActionPropertiesDefaults.default(),
     menuActionStyle: MenuActionStyle = MenuActionStyleDefaults.defaultStyle(iconTint = MaterialTheme.colorScheme.onBackground),
     rightActions: List<@Composable (MenuActionStyle) -> Unit> = emptyList(),
     onClose: () -> Unit = {},
@@ -74,7 +74,7 @@ fun ScreenHeader(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth(),
         ) {
-            if (leftIconProperties.isVisible) {
+            if (leftIconProperties?.isVisible == true) {
                 ShadowIconButton(
                     icon = painterResource(leftIconProperties.iconResource),
                     iconTint = menuActionStyle.iconTint,

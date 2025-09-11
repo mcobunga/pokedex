@@ -59,7 +59,7 @@ fun ScreenScaffoldContainer(
     titleColor: Color = MaterialTheme.colorScheme.onBackground,
     containerColor: Color = MaterialTheme.colorScheme.background,
     surfaceColor: Color = MaterialTheme.colorScheme.background,
-    leftActionProperties: LeftActionProperties = LeftActionPropertiesDefaults.default(),
+    leftActionProperties: LeftActionProperties? = LeftActionPropertiesDefaults.default(),
     menuActionStyle: MenuActionStyle = MenuActionStyleDefaults.defaultStyle(iconTint = MaterialTheme.colorScheme.onBackground),
     rightActions: List<@Composable (MenuActionStyle) -> Unit> = emptyList(),
     screenBottomBar: @Composable () -> Unit = {},
@@ -116,7 +116,7 @@ private fun ScreenTopBar(
     screenTitle: String,
     onBack: () -> Unit,
     titleColor: Color,
-    leftActionProperties: LeftActionProperties,
+    leftActionProperties: LeftActionProperties?,
     menuActionStyle: MenuActionStyle,
     useSafeAreaPadding: Boolean,
     rightActions: List<@Composable (MenuActionStyle) -> Unit>,
@@ -163,30 +163,6 @@ private fun ScreenScaffoldContainerPreview() {
                 screenTitle = "Send Money",
                 onBack = {},
                 screenBottomBar = {},
-            ) {
-                // Screen Contents
-            }
-        }
-    }
-}
-
-/** Screen scaffold container w ith bottom bar preview */
-@Composable
-@PreviewLightDark
-private fun ScreenScaffoldContainerWithBottomBarPreview() {
-    PokedexTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            ScreenScaffoldContainer(
-                screenTitle = "Send Money",
-                onBack = {},
-                screenBottomBar = {
-                    ScreenBottomBarActions(
-                        actions = listOf(
-                            { SecondaryButton(modifier = Modifier.weight(1F), text = "Cancel", onClick = {}) },
-                            { PrimaryButton(modifier = Modifier.weight(1F), text = "Retry", onClick = {}) },
-                        ),
-                    )
-                },
             ) {
                 // Screen Contents
             }
