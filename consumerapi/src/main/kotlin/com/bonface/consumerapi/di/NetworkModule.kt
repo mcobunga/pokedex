@@ -3,9 +3,6 @@ package com.bonface.consumerapi.di
 import android.content.Context
 import com.bonface.consumerapi.BuildConfig
 import com.bonface.consumerapi.data.api.PokemonApiService
-import com.bonface.consumerapi.domain.ErrorHandler
-import com.bonface.consumerapi.repository.PokemonRepository
-import com.bonface.consumerapi.repository.PokemonRepositoryImpl
 import com.bonface.consumerapi.utils.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -81,11 +78,6 @@ object NetworkModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): PokemonApiService =
         retrofit.create(PokemonApiService::class.java)
-
-    @Singleton
-    @Provides
-    fun providesRepository(apiService: PokemonApiService, errorHandler: ErrorHandler): PokemonRepository =
-        PokemonRepositoryImpl(apiService, errorHandler)
 
     @Provides
     @IoDispatcher

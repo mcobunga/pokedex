@@ -47,7 +47,7 @@ archCore = "2.2.0"
 mockitoCore = "5.19.0"
 mockitoKotlin = "6.0.0"
 truth = "1.4.4"
-
+turbine = "1.2.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -130,7 +130,7 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
-
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 
 
