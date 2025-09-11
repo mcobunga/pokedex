@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_continue">Continue</string>
+    <string name="action_goto_description">Go to</string>
+    <string name="content_description_action_close">Close</string>
+    <string name="content_description_avatar_text">Avatar for %1$s</string>
+    <string name="toggle_description_expand">Expand</string>
+    <string name="toggle_description_close">Close</string>
+</resources>

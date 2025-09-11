@@ -13,65 +13,20 @@ junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.9.3"
 activityCompose = "1.11.0"
-composeBom = "2025.08.01"
-
-
-# Firebase
-firebaseAnalytics = "23.0.0"
-firebaseCrashlytics = "20.0.1"
-
-
-
-datastorePreferences = "1.1.7"
-firebaseCrashlyticsGradle = "3.0.6"
-googleServices = "4.4.3"
-gradle = "8.13.0"
-media = "1.7.0"
-retrofit = "3.0.0"
-splash = "1.1.0-rc01"
-daggerHilt = "2.57.1"
-okhttp = "5.1.0"
-loggingInterceptor = "5.1.0"
-moshi = "1.15.2"
-moshiConverter = "3.0.0"
-timber = "5.0.1"
-junit = "4.13.2"
-junitExt = "1.3.0"
-testComposeBom = "2025.03.00"
-material = "1.9.1"
-materialGoogle = "1.13.0"
-materialIcons = "1.7.8"
-materialIconsExt = "1.7.8"
+composeBom = "2025.09.00"
 composeLifecycle = "2.9.3"
-coroutineCore = "1.10.2"
-coroutinesAndroid = "1.10.2"
-lifecycleViewmodel = "2.9.3"
-lifecycleRuntime = "2.9.3"
-composeNavigation = "2.8.9"
-coilCompose = "2.7.0"
-hiltViewModel = "1.3.0"
-hiltNavigation = "1.3.0"
-mockk = "1.14.5"
-mockkWebServer = "5.1.0"
-coroutineTest = "1.10.2"
-archCore = "2.2.0"
-turbine = "1.2.1"
-mockitoCore = "5.19.0"
-mockitoKotlin = "6.0.0"
-truth = "1.4.4"
-leakCanary = "3.0-alpha-8"
-media3 = "1.8.0"
-constraintLayout = "1.1.1"
-composeDestinations = "2.2.0"
+composeNavigation = "2.9.4"
+
+junit = "4.13.2"
 compose_material_navigation = "1.9.1"
+
+# Lottie
+compose_lottie = "6.6.7"
+# Palette
+palette = "1.0.0"
+# Glide
 glide = "5.0.4"
 glide_compose = "1.0.0-beta07"
-# Dokka
-dokka = "2.0.0"
-palette = "1.0.0"
-compose_lottie = "6.6.7"
-
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -98,7 +53,6 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
-
 ## UI - Compose
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 compose_ui = { group = "androidx.compose.ui", name = "ui" }
@@ -116,7 +70,13 @@ compose_lifecycle_viewmodel = { group = "androidx.lifecycle", name = "lifecycle-
 
 ## UI - Palette
 palette = { group = "androidx.palette", name = "palette-ktx", version.ref = "palette" }
+# Lottie
 compose_lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "compose_lottie" }
+
+# UI - Media Loading
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glide_compose" }
+glide-annotations = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 
 
 #core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -142,12 +102,6 @@ compose_lottie = { group = "com.airbnb.android", name = "lottie-compose", versio
 #
 #firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 #firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
-#splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash" }
-#
-## UI - Media Loading
-#glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-#glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glide_compose" }
-#glide-annotations = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 #
 #dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = "daggerHilt" }
 #dagger-hilt-ksp = { module = "com.google.dagger:hilt-android-compiler", version.ref = "daggerHilt" }
@@ -185,9 +139,7 @@ junit = { module = "junit:junit", version.ref = "junit" }
 #turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 #truth = { module = "com.google.truth:truth", version.ref = "truth" }
 #leak-canary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
-#
-## Dokka
-#dokka_documentation_plugin = { group = "org.jetbrains.dokka", name = "android-documentation-plugin", version.ref = "dokka" }
+
 
 
 
