@@ -7,10 +7,8 @@ import com.squareup.moshi.JsonClass
 @Keep
 @JsonClass(generateAdapter = true)
 data class Pokemon(
-    @Json(name = "name")
-    val name: String,
-    @Json(name = "url")
-    val url: String
+    @Json(name = "name") val name: String,
+    @Json(name = "url") val url: String
 )
 
 
