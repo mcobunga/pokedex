@@ -48,12 +48,15 @@ fun PokedexNavigation(
             ) { backStackEntry ->
                 val pokemonId = backStackEntry.arguments?.getInt("pokemonId") ?: return@composable
                 val viewModel: PokemonDetailsViewModel = hiltViewModel()
+                val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
                 LaunchedEffect(pokemonId) {
                     viewModel.getPokemonDetails(pokemonId)
                 }
 
                 PokemonDetailsScreen(
+                    uiState = uiState,
+                    onRetry = { viewModel.getPokemonDetails(pokemonId) },
                     onBack = { navController.navigateUp() }
                 )
             }

@@ -99,7 +99,7 @@ object TestCreationUtils {
     }
 
     fun samplePokemonDetailsErrorResponse(): Result<DetailedPokedexResponse, Failure.Network> {
-        return Result.Error(Failure.Network.RequestTimeout)
+        return Result.Error(Failure.Network.ServerError(message = "Something went wrong"))
     }
 
 }

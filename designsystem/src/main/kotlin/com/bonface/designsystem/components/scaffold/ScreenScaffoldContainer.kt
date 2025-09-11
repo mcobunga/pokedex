@@ -17,8 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.bonface.designsystem.components.buttons.PrimaryButton
-import com.bonface.designsystem.components.buttons.SecondaryButton
 import com.bonface.designsystem.components.menu.MenuActionStyle
 import com.bonface.designsystem.components.menu.MenuActionStyleDefaults
 import com.bonface.designsystem.components.modifiers.conditional

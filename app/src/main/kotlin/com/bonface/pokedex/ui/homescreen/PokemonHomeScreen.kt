@@ -49,9 +49,8 @@ fun PokemonHomeScreen(
                 }
 
                 is PokemonUiState.Error -> {
-                    val errorMessage = uiState.error.asString()
                     EmptyContainer(
-                        title = errorMessage,
+                        title = uiState.error.asString(),
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(top = MaterialTheme.dimensions.medium),

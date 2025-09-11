@@ -6,7 +6,9 @@ import com.bonface.consumerapi.repository.PokemonRepository
 import com.bonface.pokedex.helpers.UiText
 import com.bonface.pokedex.utils.BaseTest
 import com.bonface.pokedex.utils.MainDispatcherRule
-import com.bonface.pokedex.utils.TestCreationUtils
+import com.bonface.pokedex.utils.TestCreationUtils.getPokemon
+import com.bonface.pokedex.utils.TestCreationUtils.samplePokemonErrorResponse
+import com.bonface.pokedex.utils.TestCreationUtils.samplePokemonResponse
 import com.bonface.pokedex.viewmodel.PokemonUiState
 import com.bonface.pokedex.viewmodel.PokemonViewModel
 import io.mockk.clearAllMocks
@@ -64,7 +66,7 @@ class PokemonViewModelTest : BaseTest() {
     @Test
     fun `Given that getPokemon api call return success, make sure that we show a success state`() = runTest {
         // GIVEN
-        coEvery { repository.getPokemon() } returns flowOf(TestCreationUtils.samplePokemonResponse())
+        coEvery { repository.getPokemon() } returns flowOf(samplePokemonResponse())
 
         // WHEN
         viewModel.getPokemon()
@@ -74,7 +76,7 @@ class PokemonViewModelTest : BaseTest() {
             val state = awaitItem()
             assert(state is PokemonUiState.Success)
             assertEquals(
-                TestCreationUtils.getPokemon().results.map { it.toPokedex() }.toImmutableList(),
+                getPokemon().results.map { it.toPokedex() }.toImmutableList(),
                 (state as PokemonUiState.Success).pokemonList
             )
             assertNotNull(viewModel.uiState.value)
@@ -84,7 +86,7 @@ class PokemonViewModelTest : BaseTest() {
     @Test
     fun `Given that getPokemon api call returns an error, make sure that we emit error state`() = runTest {
         // GIVEN
-        coEvery { repository.getPokemon() } returns flowOf(TestCreationUtils.samplePokemonErrorResponse())
+        coEvery { repository.getPokemon() } returns flowOf(samplePokemonErrorResponse())
 
         // WHEN
         viewModel.getPokemon()

@@ -1,15 +1,15 @@
 package com.bonface.pokedex.details
 
 import app.cash.turbine.test
-import com.bonface.consumerapi.domain.Failure
 import com.bonface.consumerapi.repository.PokemonRepository
+import com.bonface.pokedex.helpers.UiText
 import com.bonface.pokedex.utils.BaseTest
 import com.bonface.pokedex.utils.MainDispatcherRule
 import com.bonface.pokedex.utils.TestCreationUtils.pokedexDetails
 import com.bonface.pokedex.utils.TestCreationUtils.samplePokemonDetails
 import com.bonface.pokedex.utils.TestCreationUtils.samplePokemonDetailsErrorResponse
 import com.bonface.pokedex.utils.TestCreationUtils.samplePokemonSpecies
-import com.bonface.pokedex.viewmodel.DetailsUiState
+import com.bonface.pokedex.viewmodel.PokemonDetailsUiState
 import com.bonface.pokedex.viewmodel.PokemonDetailsViewModel
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
@@ -56,8 +56,8 @@ class PokemonDetailsViewModelTest: BaseTest() {
         viewModel.getPokemonDetails(1)
         //THEN
         viewModel.uiState.test {
-            assertEquals(DetailsUiState.Loading, awaitItem())
-            assert(viewModel.uiState.value is DetailsUiState.Loading)
+            assertEquals(PokemonDetailsUiState.Loading, awaitItem())
+            assert(viewModel.uiState.value is PokemonDetailsUiState.Loading)
         }
     }
 
@@ -70,10 +70,10 @@ class PokemonDetailsViewModelTest: BaseTest() {
         viewModel.getPokemonDetails(1)
         //THEN
         viewModel.uiState.test {
-            assert(viewModel.uiState.value is DetailsUiState.Success)
-            assertEquals(DetailsUiState.Success(pokedexDetails()), awaitItem())
-            assertNotNull((viewModel.uiState.value as DetailsUiState.Success).details)
-            assertEquals((viewModel.uiState.value as DetailsUiState.Success).details?.pokemonId, pokedexDetails().pokemonId)
+            assert(viewModel.uiState.value is PokemonDetailsUiState.Success)
+            assertEquals(PokemonDetailsUiState.Success(pokedexDetails()), awaitItem())
+            assertNotNull((viewModel.uiState.value as PokemonDetailsUiState.Success).details)
+            assertEquals((viewModel.uiState.value as PokemonDetailsUiState.Success).details.pokemonId, pokedexDetails().pokemonId)
         }
     }
 
@@ -85,11 +85,16 @@ class PokemonDetailsViewModelTest: BaseTest() {
 
         // WHEN
         viewModel.getPokemonDetails(1)
+
         //THEN
+
         viewModel.uiState.test {
-            assert(viewModel.uiState.value is DetailsUiState.Error)
-            assertEquals(DetailsUiState.Error(Failure.Network.RequestTimeout), awaitItem())
-            assertEquals((viewModel.uiState.value as DetailsUiState.Error).error, Failure.Network.RequestTimeout)
+            val state = awaitItem()
+            assert(state is PokemonDetailsUiState.Error)
+
+            val error = (state as PokemonDetailsUiState.Error).error
+            assert(error is UiText.DynamicString)
+            assertEquals("Something went wrong", (error as UiText.DynamicString).value)
         }
     }
 }
