@@ -31,9 +31,12 @@ import com.bonface.designsystem.components.card.CardStyleDefaults
 import com.bonface.designsystem.components.image.BasicImage
 import com.bonface.designsystem.components.text.BasicText
 import com.bonface.designsystem.extensions.PaletteUtils.convertImageUrlToBitmap
+import com.bonface.designsystem.extensions.capitalizeFirst
 import com.bonface.designsystem.extensions.customColors
 import com.bonface.designsystem.extensions.derivedBackgroundColor
 import com.bonface.designsystem.extensions.dimensions
+import com.bonface.designsystem.helpers.EMPTY
+import com.bonface.designsystem.helpers.highlightIfMatches
 import com.bonface.designsystem.theme.PokedexTheme
 import com.bonface.pokedex.R
 
@@ -41,6 +44,7 @@ import com.bonface.pokedex.R
 fun PokemonCard(
     modifier: Modifier = Modifier,
     pokedex: Pokedex,
+    searchQuery: String = EMPTY,
     navigateToDetails: (Int) -> Unit,
 ) {
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
@@ -93,7 +97,7 @@ fun PokemonCard(
                 contentAlignment = Alignment.BottomCenter
             ) {
                 BasicText(
-                    text = pokedex.name.replaceFirstChar { it.titlecase() },
+                    text = highlightIfMatches(text = pokedex.name.capitalizeFirst(), query = searchQuery, highlightColor = MaterialTheme.colorScheme.primary),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.customColors.white,
                     fontWeight = FontWeight.Bold,

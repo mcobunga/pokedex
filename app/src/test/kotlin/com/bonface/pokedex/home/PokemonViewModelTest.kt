@@ -21,7 +21,6 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -73,13 +72,16 @@ class PokemonViewModelTest : BaseTest() {
 
         // THEN
         viewModel.uiState.test {
+            // First emission will always be Loading now
+            assert(awaitItem() is PokemonUiState.Loading)
+
+            // Next emission should be Success after repo emits
             val state = awaitItem()
             assert(state is PokemonUiState.Success)
             assertEquals(
                 getPokemon().results.map { it.toPokedex() }.toImmutableList(),
                 (state as PokemonUiState.Success).pokemonList
             )
-            assertNotNull(viewModel.uiState.value)
         }
     }
 
@@ -93,6 +95,10 @@ class PokemonViewModelTest : BaseTest() {
 
         // THEN
         viewModel.uiState.test {
+            // First emission will be Loading
+            assert(awaitItem() is PokemonUiState.Loading)
+
+            // Next emission should be Error
             val state = awaitItem()
             assert(state is PokemonUiState.Error)
 

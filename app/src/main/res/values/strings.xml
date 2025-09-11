@@ -31,4 +31,5 @@
     <string name="unknown_error">An unknown error occurred</string>
     <string name="error_disk_full">Failed to save the item because your device\'s disk is full</string>
     <string name="error_serialization">Oops, couldn\'t parse data.</string>
+    <string name="search_pokemon">Search pokemon…</string>
 </resources>
