@@ -11,183 +11,179 @@ internal object ColorDefaults {
     val LightColorSchemeV1
         @Composable @ReadOnlyComposable
         get() = lightColorScheme(
-            primary = Color(0xFFE3350D),       // Poké Ball Red
-            onPrimary = Color.White,
-            primaryContainer = Color(0xFFFFAFA3),
-            onPrimaryContainer = Color(0xFF410000),
+            primary = Color(0xFF35A839),
+            onPrimary = Color(0xFFFFFFFF),
+            primaryContainer = Color(0xFFBEF0B2),
+            onPrimaryContainer = Color(0xFF002202),
 
-            secondary = Color(0xFFFFCC00),     // Pikachu Yellow
-            onSecondary = Color.Black,
-            secondaryContainer = Color(0xFFFFF59D),
-            onSecondaryContainer = Color(0xFF3B2F00),
+            secondary = Color(0xFFFF2A58),
+            onSecondary = Color(0xFFFFFFFF),
+            secondaryContainer = Color(0xFFFFDADB),
+            onSecondaryContainer = Color(0xFF3B0810),
 
-            tertiary = Color(0xFF3B4CCA),      // Pokémon Blue
-            onTertiary = Color.White,
-            tertiaryContainer = Color(0xFFB3C6FF),
-            onTertiaryContainer = Color(0xFF000D47),
+            tertiary = Color(0xFF3D6838),
+            onTertiary = Color(0xFFAAAAAA),
+            tertiaryContainer = Color(0xFFBEF0B2),
+            onTertiaryContainer = Color(0xFFAAAAAA),
 
-            error = Color(0xFFFF2A58),         // Magenta Red
-            onError = Color.White,
+            error = Color(0xFFF40000),
+            onError = Color(0xFFFFFFFF),
             errorContainer = Color(0xFFFFDAD4),
             onErrorContainer = Color(0xFF3A0905),
 
-            background = Color(0xFFF8F9FA),    // Pokédex neutral
-            onBackground = Color(0xFF1C1C1C),
+            background = Color(0xFFFFFFFF),
+            onBackground = Color(0xFF303030),
 
-            surface = Color.White,
-            onSurface = Color(0xFF303030),
-            surfaceVariant = Color(0xFFE6E8EB),
-            onSurfaceVariant = Color(0xFF424242),
+            surface = Color(0xFFFFFFFF),
+            onSurface = Color(0xFF757575),
+            surfaceVariant = Color(0xFFEAF6EE),
+            onSurfaceVariant = Color(0xFF42493F),
 
-            outline = Color(0xFFB0BEC5),
-            outlineVariant = Color(0xFF90A4AE),
+            outline = Color(0xFFCBD5E1),
+            outlineVariant = Color(0xFF999999),
 
             scrim = Color(0x99000000),
 
             inverseSurface = Color(0xFF2B3133),
-            inverseOnSurface = Color(0xFFF1F1F1),
-            inversePrimary = Color(0xFFB3280A),
+            inverseOnSurface = Color(0xFFECF2F3),
+            inversePrimary = Color(0xFFA2D398),
 
             surfaceDim = Color(0xFFD5DBDC),
-            surfaceBright = Color(0xFFFDFDFD),
-            surfaceContainerLowest = Color.White,
-            surfaceContainerLow = Color(0xFFF4F6F8),
-            surfaceContainer = Color(0xFFEFF2F4),
-            surfaceContainerHigh = Color(0xFFE3E7EA),
-            surfaceContainerHighest = Color(0xFFDADFE2),
+            surfaceBright = Color(0xFFF5FAFB),
+            surfaceContainerLowest = Color(0xFFFFFFFF),
+            surfaceContainerLow = Color(0xFFEFF5F6),
+            surfaceContainer = Color(0xFFE9EFF0),
+            surfaceContainerHigh = Color(0xFFE3E9EA),
+            surfaceContainerHighest = Color(0xFFDEE3E5),
         )
 
     val DarkColorSchemeV1
         @Composable @ReadOnlyComposable
         get() = darkColorScheme(
-            primary = Color(0xFFFF554D),       // Bright red for dark mode
-            onPrimary = Color.Black,
-            primaryContainer = Color(0xFF7A1E0D),
-            onPrimaryContainer = Color(0xFFFFB4A6),
+            primary = Color(0xFF2DA044),
+            onPrimary = Color(0xFF121212),
+            primaryContainer = Color(0xFF255023),
+            onPrimaryContainer = Color(0xFFBEF0B2),
 
-            secondary = Color(0xFFFFD95C),     // Bright yellow
-            onSecondary = Color.Black,
-            secondaryContainer = Color(0xFF7A6600),
-            onSecondaryContainer = Color(0xFFFFF4B2),
+            secondary = Color(0xFFF14F72),
+            onSecondary = Color(0xFF121212),
+            secondaryContainer = Color(0xFF723339),
+            onSecondaryContainer = Color(0xFFFFDADB),
 
-            tertiary = Color(0xFF8097FF),      // Pokémon Blue lightened
-            onTertiary = Color.Black,
-            tertiaryContainer = Color(0xFF253080),
-            onTertiaryContainer = Color(0xFFDEE0FF),
+            tertiary = Color(0xFF8AD6B7),
+            onTertiary = Color(0xFFCBD5E1),
+            tertiaryContainer = Color(0xFF00513C),
+            onTertiaryContainer = Color(0xFFA6F2D2),
 
-            error = Color(0xFFFF5C8D),         // Brighter magenta-red
-            onError = Color.Black,
-            errorContainer = Color(0xFF7A1E2A),
+            error = Color(0XFFF40000),
+            onError = Color(0xFF561E16),
+            errorContainer = Color(0xFF73342A),
             onErrorContainer = Color(0xFFFFDAD4),
 
-            background = Color(0xFF121212),    // Pokédex dark mode
-            onBackground = Color(0xFFE0E0E0),
+            background = Color(0xFF121212),
+            onBackground = Color(0xFFDBDBDB),
 
-            surface = Color(0xFF1C1C1C),
+            surface = Color(0xFF1E1E1E),
             onSurface = Color(0xFFC1C3C7),
-            surfaceVariant = Color(0xFF2C2C2C),
-            onSurfaceVariant = Color(0xFFB3B3B3),
+            surfaceVariant = Color(0x1AFFFFFF),
+            onSurfaceVariant = Color(0xFFC1C3C7),
 
-            outline = Color(0xFF616161),
-            outlineVariant = Color(0xFF8A8A8A),
+            outline = Color(0xFF475569),
+            outlineVariant = Color(0xFF999999),
 
             scrim = Color(0xE6000000),
 
-            inverseSurface = Color(0xFFE5E5E5),
-            inverseOnSurface = Color(0xFF2C2C2C),
-            inversePrimary = Color(0xFFD32F2F),
+            inverseSurface = Color(0xFFDEE3E5),
+            inverseOnSurface = Color(0xFF2B3133),
+            inversePrimary = Color(0xFF3D6838),
 
-            surfaceDim = Color(0xFF0E0E0E),
-            surfaceBright = Color(0xFF333333),
-            surfaceContainerLowest = Color(0xFF090909),
-            surfaceContainerLow = Color(0xFF171717),
-            surfaceContainer = Color(0xFF1E1E1E),
-            surfaceContainerHigh = Color(0xFF2A2A2A),
-            surfaceContainerHighest = Color(0xFF303030),
+            surfaceDim = Color(0xFF0E1415),
+            surfaceBright = Color(0xFF343A3B),
+            surfaceContainerLowest = Color(0xFF090F10),
+            surfaceContainerLow = Color(0xFF171D1E),
+            surfaceContainer = Color(0xFF1B2122),
+            surfaceContainerHigh = Color(0xFF252B2C),
+            surfaceContainerHighest = Color(0xFF303637),
         )
 
     val CustomLightColorSchemeV1
         @Composable @ReadOnlyComposable
         get() = ColorScheme(
-            primaryButton = Color(0xFFE3350D),      // Poké Ball Red
-            secondaryButton = Color(0xFFFFCC00),    // Pikachu Yellow
-            dangerButton = Color(0xFFFF2A58),       // Danger/Pink (fairy-like)
-            tertiaryButton = Color(0xFF3B4CCA),     // Pokémon Blue
+            primaryButton = Color(0xFF35A839),
+            secondaryButton = Color(0xFF35A839),
+            dangerButton = Color(0xFFFF2A58),
+            tertiaryButton = Color(0xFF757575),
 
-            disabledPrimaryButton = Color(0xFFEEEEEE),
-            onDisabledPrimaryButton = Color(0xFF9E9E9E),
-            disabledSecondaryButton = Color(0xFFEEEEEE),
-            onDisabledSecondaryButton = Color(0xFF9E9E9E),
+            disabledPrimaryButton = Color(0xFFDCDFED),
+            onDisabledPrimaryButton = Color(0xFF757575),
+            disabledSecondaryButton = Color(0xFFDCDFED),
+            onDisabledSecondaryButton = Color(0xFFDCDFED),
 
-            disabled = Color(0xFFDDDDDD),
+            disabled = Color(0x4DE3E3E3),
             onDisabled = Color(0xFF757575),
 
-            icon = Color(0xFF616161),
+            icon = Color(0xFFAAAAAA),
             iconShadow = Color(0x122B2D33),
             cardShadow = Color(0x332B2D33),
 
-            homeBackground = Color(0xFFF8F9FA),
-            componentBackground = Color.White,
-            unselectedChipsBackground = Color(0xFFE0E0E0),
+            homeBackground = Color(0xFFF2F3F6),
+            componentBackground = Color(0xFFF7F7F7),
+            unselectedChipsBackground = Color(0xFFE3E3E3),
 
             shimmerStart = Color(0xFFF1F3F6),
             shimmerCenter = Color(0xFFE5E7EA),
             shimmerEnd = Color(0xFFF1F3F6),
 
-            gradientStart = Color(0xFFE3350D),      // Poké Ball gradient
-            gradientEnd = Color(0xFF3B4CCA),        // Pokémon Blue
-            gradientErrorStart = Color(0xFFFFCC15), // Warning Yellow
-            gradientErrorEnd = Color(0XFFF40000),   // Error Red
+            gradientStart = Color(0xFF15ABFF),
+            gradientEnd = Color(0xFF00F410),
+            gradientErrorStart = Color(0xFFFFCC15),
+            gradientErrorEnd = Color(0XFFF40000),
 
-            // Pokémon Type Accents (great for cards/details)
-            tertiaryBlueDim = Color(0xFF56B3FF),    // Water
-            tertiaryBlueBright = Color(0xFFADD8FF), // Ice
-            tertiaryPearl = Color(0xFFAA00FF),      // Psychic
-            tertiarySky = Color(0xFF00CFFF),        // Flying
-            tertiaryOrange = Color(0xFFFF6D37),     // Fire/Fighting
-            tertiaryLime = Color(0xFF77CC55),       // Grass/Bug
-
+            tertiaryBlueDim = Color(0xFF94D6FB),
+            tertiaryBlueBright = Color(0xFFE5F1F8),
+            tertiaryPearl = Color(0xFF398FF3),
+            tertiarySky = Color(0xFF39CEF3),
+            tertiaryOrange = Color(0xFFFF6D37),
+            tertiaryLime = Color(0xFF97D85E),
             statusBar = Color(0xFFFFFFFF),
         )
 
     val CustomDarkColorSchemeV1
         @Composable @ReadOnlyComposable
         get() = ColorScheme(
-            primaryButton = Color(0xFFFF554D),      // Bright red in dark
-            secondaryButton = Color(0xFFFFD95C),    // Pikachu Yellow
-            dangerButton = Color(0xFFFF5C8D),       // Fairy/Danger
-            tertiaryButton = Color(0xFF8097FF),     // Pokémon Blue Light
+            primaryButton = Color(0xFF2DA044),
+            secondaryButton = Color(0xFF2DA044),
+            dangerButton = Color(0xFFFF2A58),
+            tertiaryButton = Color(0xFFC1C3C7),
 
             disabledPrimaryButton = Color(0xFF333333),
-            onDisabledPrimaryButton = Color(0xFFAAAAAA),
+            onDisabledPrimaryButton = Color(0xFFC1C3C7),
             disabledSecondaryButton = Color(0xFF333333),
-            onDisabledSecondaryButton = Color(0xFFAAAAAA),
+            onDisabledSecondaryButton = Color(0xFFC1C3C7),
 
-            icon = Color(0xFFB0BEC5),
+            icon = Color(0xFFCBD5E1),
             disabled = Color(0xFF2A2A2A),
-            onDisabled = Color(0xFF888888),
+            onDisabled = Color(0xFFC1C3C7),
 
             homeBackground = Color(0xFF121212),
-            componentBackground = Color(0xFF1E1E1E),
+            componentBackground = Color(0xFF333333),
             unselectedChipsBackground = Color(0xFF2A2A2A),
 
             shimmerStart = Color(0x1AF1F3F6),
             shimmerCenter = Color(0x33E5E7EA),
             shimmerEnd = Color(0x1AF1F3F6),
 
-            gradientStart = Color(0xFFE3350D),      // Red
-            gradientEnd = Color(0xFF3B4CCA),        // Blue
-            gradientErrorStart = Color(0xFFFFCC15), // Warning
-            gradientErrorEnd = Color(0XFFF40000),   // Error
+            gradientStart = Color(0xFF15ABFF),
+            gradientEnd = Color(0xFF00F410),
+            gradientErrorStart = Color(0xFFFFCC15),
+            gradientErrorEnd = Color(0XFFF40000),
 
-            // Pokémon Type Accents (Dark mode)
-            tertiaryBlueDim = Color(0xFF196895),    // Water
-            tertiaryBlueBright = Color(0xFF1B3E51), // Ice
-            tertiaryPearl = Color(0xFF9C27B0),      // Psychic
-            tertiarySky = Color(0xFF00B8D4),        // Flying
-            tertiaryOrange = Color(0xFFFF5722),     // Fire/Fighting
-            tertiaryLime = Color(0xFF66BB6A),       // Grass/Bug
-
+            tertiaryBlueDim = Color(0xFF196895),
+            tertiaryBlueBright = Color(0xFF1B3E51),
+            tertiaryPearl = Color(0xFF0C70E6),
+            tertiarySky = Color(0xFF0FB4DD),
+            tertiaryOrange = Color(0xFFFE591B),
+            tertiaryLime = Color(0xFF75BA2D),
             statusBar = Color(0xFF121212),
         )
 }

@@ -35,19 +35,19 @@ fun LineProgressIndicator(
     progressColor: Color = MaterialTheme.colorScheme.primary,
     filledColor: Color = MaterialTheme.colorScheme.secondary,
 ) {
+    val progress = progressState.progress.coerceIn(0f, 1f) // normalize
     val lineColor by animateColorAsState(
-        targetValue = if (progressState.progress < .90F) progressColor else filledColor,
+        targetValue = if (progress < 1f) progressColor else filledColor,
         label = "lineColor",
     )
 
     LinearProgressIndicator(
-        progress = { progressState.progress },
+        progress = { progress },
+        modifier = modifier.fillMaxWidth()
+            .clip(CircleShape),
         color = lineColor,
         trackColor = MaterialTheme.colorScheme.outline,
         strokeCap = ProgressIndicatorDefaults.CircularDeterminateStrokeCap,
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(CircleShape),
     )
 }
 
