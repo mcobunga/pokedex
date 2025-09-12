@@ -50,7 +50,6 @@ Architecture
 * Testing
   - JUnit & AndroidX Test – Unit and instrumentation testing.
   - MockK & Mockito – Mocking frameworks for reliable tests.
-  - Robolectric – Fast unit tests without device/emulator.
   - Turbine & Truth – Utilities for testing flows and assertions.
 * CI/CD
   - GitHub Actions – Automated builds, tests, and deployment pipelines.
