@@ -1,4 +1,4 @@
-package com.bonface.designsystem.extensions
+package com.bonface.designsystem.components.modifiers
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
@@ -36,6 +36,31 @@ fun Modifier.hideKeyboardAndClearFocusOnScrollDown(
         if (available.y < ZERO_FLOAT) {
             keyboardController?.hide()
             focusManager.clearFocus(force = true)
+        }
+        return Offset.Zero
+    }
+})
+
+
+/**
+ * A [Modifier] extension that hides the search input when the user scrolls down.
+ *
+ * This uses a [NestedScrollConnection] to intercept scroll gestures. Whenever a downward scroll
+ * is detected (negative Y offset), the provided [onHideSearch] callback is invoked, allowing
+ * the caller to collapse or hide the search UI.
+ *
+ * @param onHideSearch A callback that will be triggered when a downward scroll is detected.
+ * Typically used to update state that controls the visibility of a search input.
+ *
+ * @return A [Modifier] that can be applied to scrollable composables to automatically hide
+ * the search input on downward scrolling.
+ */
+fun Modifier.hideSearchOnScrollDown(
+    onHideSearch: () -> Unit
+): Modifier = this.nestedScroll(object : NestedScrollConnection {
+    override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+        if (available.y < 0) {
+            onHideSearch()
         }
         return Offset.Zero
     }

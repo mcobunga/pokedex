@@ -1,5 +1,6 @@
 package com.bonface.designsystem.components.buttons
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -22,6 +23,7 @@ import com.bonface.designsystem.components.modifiers.shadow
 import com.bonface.designsystem.extensions.avatars
 import com.bonface.designsystem.extensions.dimensions
 import com.bonface.designsystem.extensions.elevations
+import com.bonface.designsystem.helpers.DisableRippleInteraction
 import com.bonface.designsystem.theme.PokedexTheme
 
 /**
@@ -55,18 +57,19 @@ fun ShadowIconButton(
     onClick: () -> Unit = {},
 ) {
     Card(
-        colors = CardDefaults.cardColors(
-            containerColor = containerColor,
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = MaterialTheme.elevations.none,
-        ),
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+        elevation = CardDefaults.cardElevation(defaultElevation = MaterialTheme.elevations.none),
         shape = CircleShape,
-        modifier = modifier.shadow(
-            offsetX = shadowOffsetX,
-            offsetY = shadowOffsetY,
-            blurRadius = shadowBlurRadius,
-        ),
+        modifier = modifier
+            .shadow(
+                offsetX = shadowOffsetX,
+                offsetY = shadowOffsetY,
+                blurRadius = shadowBlurRadius,
+            )
+            .clickable(
+                interactionSource = DisableRippleInteraction,
+                onClick = onClick
+            ),
     ) {
         IconButton(
             onClick = onClick,

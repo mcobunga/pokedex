@@ -50,7 +50,7 @@ import com.bonface.designsystem.theme.PokedexTheme
 fun EmptyContainer(
     modifier: Modifier = Modifier,
     title: String = EMPTY,
-    annotatedTitle: AnnotatedString = buildAnnotatedString { },
+    annotatedTitle: AnnotatedString = buildAnnotatedString {},
     description: String = EMPTY,
     icon: Any? = null,
     iconSize: Dp = MaterialTheme.avatars.large,
@@ -130,8 +130,8 @@ private fun EmptyContainerPreview() {
     PokedexTheme {
         Surface {
             EmptyContainer(
-                title = "No Contacts",
-                description = "There are no contacts at the moment",
+                title = "No Pokemon",
+                description = "No pokemons were found",
                 icon = painterResource(R.drawable.ic_search_normal),
             )
         }

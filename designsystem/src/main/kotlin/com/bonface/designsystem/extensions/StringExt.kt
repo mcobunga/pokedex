@@ -1,8 +1,14 @@
 package com.bonface.designsystem.extensions
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import com.bonface.designsystem.R
+import com.bonface.designsystem.helpers.EMPTY
+import com.bonface.designsystem.helpers.ZERO
 
 /**
  * Applies **bold styling** to specific substrings within this [String],
@@ -40,3 +46,21 @@ fun String.formatBold(textsToFormat: List<String>): AnnotatedString {
 
 fun String.capitalizeFirst(): String =
     replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+
+
+@Composable
+fun boldQueryText(query: String): AnnotatedString {
+    if (query.isNotEmpty()) {
+        val quotedQuery = "“$query”"
+        val messageText = stringResource(R.string.search_no_results, quotedQuery)
+        val startIndex = messageText.indexOf(quotedQuery)
+
+        return buildAnnotatedString {
+            append(messageText)
+            if (startIndex >= ZERO) {
+                addStyle(style = SpanStyle(fontWeight = FontWeight.Bold), start = startIndex, end = startIndex + quotedQuery.length)
+            }
+        }
+    }
+    return AnnotatedString(EMPTY)
+}

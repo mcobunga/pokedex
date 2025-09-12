@@ -36,7 +36,6 @@ fun ChipsRow(
         horizontalArrangement = Arrangement.Start,
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = MaterialTheme.dimensions.medium)
             .horizontalScroll(rememberScrollState()),
     ) {
         chips.forEach { option ->

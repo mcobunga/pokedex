@@ -77,8 +77,9 @@ private fun StatRow(
                     horizontal = MaterialTheme.dimensions.xSmall,
                 ),
             )
-            LaunchedEffect(key1 = Unit) {
-                progressState.updateProgress(progress.toFloat())
+
+            LaunchedEffect(progress) {
+                progressState.updateProgress(progress / 100f)
             }
         }
     }

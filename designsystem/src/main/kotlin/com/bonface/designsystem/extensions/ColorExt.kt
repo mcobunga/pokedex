@@ -50,7 +50,7 @@ fun String.toHslColor(
 
 @Composable
 fun textFieldOutlineColor(hasError: Boolean, isFocused: Boolean): Color {
-    val nonErrorColor = if (isFocused) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
+    val nonErrorColor = if (isFocused) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
     return if (hasError) MaterialTheme.colorScheme.error else nonErrorColor
 }
 

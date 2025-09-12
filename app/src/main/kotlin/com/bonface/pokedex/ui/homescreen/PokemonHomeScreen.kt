@@ -21,23 +21,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.bonface.consumerapi.data.model.Pokedex
-import com.bonface.designsystem.components.buttons.ShadowIconButton
-import com.bonface.designsystem.components.empty.EmptyContainer
 import com.bonface.designsystem.components.loading.FullScreenLoadingIndicator
-import com.bonface.designsystem.components.menu.MenuActionStyle
-import com.bonface.designsystem.components.menu.MenuActionStyleDefaults
+import com.bonface.designsystem.components.modifiers.hideKeyboardAndClearFocusOnScrollDown
+import com.bonface.designsystem.components.modifiers.hideSearchOnScrollDown
 import com.bonface.designsystem.components.scaffold.ScreenScaffoldContainer
 import com.bonface.designsystem.components.search.SearchInputField
 import com.bonface.designsystem.extensions.dimensions
-import com.bonface.designsystem.extensions.hideKeyboardAndClearFocusOnScrollDown
-import com.bonface.designsystem.extensions.hideSearchOnScrollDown
+import com.bonface.designsystem.helpers.TWO
 import com.bonface.designsystem.theme.PokedexTheme
 import com.bonface.pokedex.R
 import com.bonface.pokedex.viewmodel.PokemonUiState
@@ -72,33 +67,25 @@ fun PokemonHomeScreen(
         ) {
             when(uiState) {
                 is PokemonUiState.Success -> {
-                    if (uiState.pokemonList.isEmpty()) {
-                        EmptyContainer(
-                            title = stringResource(R.string.empty_pokemon),
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(top = MaterialTheme.dimensions.medium),
-                        )
-                    } else {
-                        PokemonContent(
-                            pokemonList = uiState.pokemonList,
-                            searchQuery = searchQuery,
-                            onSearchValueChange = onSearchValueChange,
-                            navigateToDetails = navigateToPokemonDetails,
-                            showSearch = showSearch,
-                            onHideSearch = { onShowSearchChange(false) },
-                        )
-                    }
+                    PokemonContent(
+                        pokemonList = uiState.pokemonList,
+                        searchQuery = searchQuery,
+                        onSearchValueChange = onSearchValueChange,
+                        navigateToDetails = navigateToPokemonDetails,
+                        showSearch = showSearch,
+                        onHideSearch = { onShowSearchChange(false) },
+                    )
                 }
 
                 is PokemonUiState.Error -> {
-                    EmptyContainer(
-                        title = uiState.error.asString(),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(top = MaterialTheme.dimensions.medium),
+                    PokemonEmptyState(
+                        modifier = Modifier.fillMaxSize(),
+                        searchQuery = searchQuery,
+                        title = stringResource(R.string.error_text),
+                        description = uiState.error.asString(),
+                        isError = true,
                         buttonText = stringResource(R.string.retry),
-                        buttonOnClick = onRetry
+                        onButtonClick = onRetry
                     )
                 }
 
@@ -139,53 +126,30 @@ private fun PokemonContent(
             )
         }
 
-        LazyVerticalGrid(
-            modifier = modifier,
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.large),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.large),
-        ) {
-            items(items = pokemonList, key = { pokedex -> pokedex.pokemonId }) { pokedex ->
-                PokemonCard(
-                    pokedex = pokedex,
-                    searchQuery = searchQuery,
-                    navigateToDetails = navigateToDetails
-                )
+        if (pokemonList.isEmpty()) {
+            PokemonEmptyState(
+                modifier = Modifier.weight(1f),
+                searchQuery = searchQuery,
+                title = stringResource(R.string.empty_pokemon)
+            )
+        } else {
+            LazyVerticalGrid(
+                modifier = modifier,
+                columns = GridCells.Fixed(TWO),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.small),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.medium),
+            ) {
+                items(items = pokemonList, key = { pokedex -> pokedex.pokemonId }) { pokedex ->
+                    PokemonCard(
+                        pokedex = pokedex,
+                        searchQuery = searchQuery,
+                        navigateToDetails = navigateToDetails
+                    )
+                }
             }
         }
     }
 }
-
-@Composable
-private fun searchMenuIcon(
-    showSearch: Boolean,
-    onSearchClick: () -> Unit,
-    onCloseClick: () -> Unit,
-): List<@Composable (MenuActionStyle) -> Unit> {
-    val menuActionStyle = MenuActionStyleDefaults.defaultStyle(
-        iconTint = MaterialTheme.colorScheme.onBackground
-    )
-
-    return listOf {
-        ShadowIconButton(
-            icon = if (showSearch) {
-                painterResource(com.bonface.designsystem.R.drawable.ic_close) // close icon
-            } else {
-                painterResource(com.bonface.designsystem.R.drawable.ic_search_normal) // search icon
-            },
-            iconTint = Color.Unspecified,
-            containerColor = menuActionStyle.containerColor,
-            contentDescription = if (showSearch) {
-                stringResource(com.bonface.designsystem.R.string.content_description_action_close)
-            } else {
-                stringResource(R.string.search_pokemon)
-            },
-            enabled = true,
-            onClick = if (showSearch) onCloseClick else onSearchClick,
-        )
-    }
-}
-
 
 @PreviewLightDark
 @Composable
