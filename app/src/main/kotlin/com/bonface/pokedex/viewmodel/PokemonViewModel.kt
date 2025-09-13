@@ -70,7 +70,7 @@ class PokemonViewModel @Inject constructor(
                 when(result) {
                     is Result.Success -> {
                         val pokemons = result.data.results.map { it.toPokedex() }.toImmutableList()
-                        _originalUiStateFlow.value = PokemonUiState.Success(pokemons)
+                        _originalUiStateFlow.value = PokemonUiState.Success(pokemons, false)
                     }
                     is Result.Error -> _originalUiStateFlow.value = PokemonUiState.Error(result.error.toUiText())
                 }
@@ -84,6 +84,14 @@ class PokemonViewModel @Inject constructor(
 
     fun onShowSearchInputChange(show: Boolean) {
         _showSearch.value = show
+    }
+
+    fun onPullToRefresh() {
+        val current = _originalUiStateFlow.value
+        if (current is PokemonUiState.Success) {
+            _originalUiStateFlow.value = current.copy(isRefreshing = true)
+        }
+        getPokemon()
     }
 
     private fun PokemonUiState.filterByQuery(query: String): PokemonUiState {
@@ -102,5 +110,8 @@ class PokemonViewModel @Inject constructor(
 sealed interface PokemonUiState {
     data object Loading : PokemonUiState
     data class Error(val error: UiText) : PokemonUiState
-    data class Success(val pokemonList: ImmutableList<Pokedex>) : PokemonUiState
+    data class Success(
+        val pokemonList: ImmutableList<Pokedex>,
+        val isRefreshing: Boolean = false
+    ) : PokemonUiState
 }

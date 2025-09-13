@@ -10,10 +10,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,10 +29,12 @@ import com.bonface.consumerapi.data.model.Pokedex
 import com.bonface.designsystem.components.loading.FullScreenLoadingIndicator
 import com.bonface.designsystem.components.modifiers.hideKeyboardAndClearFocusOnScrollDown
 import com.bonface.designsystem.components.modifiers.hideSearchOnScrollDown
+import com.bonface.designsystem.components.pulltorefresh.PullToRefreshLazyGrid
 import com.bonface.designsystem.components.scaffold.ScreenScaffoldContainer
 import com.bonface.designsystem.components.search.SearchInputField
+import com.bonface.designsystem.components.snackbar.SnackbarContainer
+import com.bonface.designsystem.extensions.customColors
 import com.bonface.designsystem.extensions.dimensions
-import com.bonface.designsystem.helpers.TWO
 import com.bonface.designsystem.theme.PokedexTheme
 import com.bonface.pokedex.R
 import com.bonface.pokedex.viewmodel.PokemonUiState
@@ -43,12 +45,13 @@ fun PokemonHomeScreen(
     uiState: PokemonUiState,
     searchQuery: String,
     showSearch: Boolean,
+    snackbarHostState: SnackbarHostState,
     navigateToPokemonDetails: (Int) -> Unit,
     onSearchValueChange: (String) -> Unit = {},
     onShowSearchChange: (Boolean) -> Unit = {},
     onRetry: () -> Unit = {},
+    onRefresh: () -> Unit = {}
 ) {
-
     ScreenScaffoldContainer(
         screenTitle = stringResource(R.string.title_home),
         leftActionProperties = null,
@@ -56,24 +59,32 @@ fun PokemonHomeScreen(
             showSearch = showSearch,
             onSearchClick = { onShowSearchChange(true) },
             onCloseClick = { onShowSearchChange(false) }
-        )
+        ),
+        customPaddingTop = MaterialTheme.dimensions.medium,
+        snackbarHost = {
+            SnackbarContainer(
+                snackbarHostState = snackbarHostState,
+                color = MaterialTheme.customColors.tertiaryOrange,
+            )
+        }
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
                 .padding(horizontal = MaterialTheme.dimensions.medium),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.medium),
         ) {
             when(uiState) {
                 is PokemonUiState.Success -> {
                     PokemonContent(
                         pokemonList = uiState.pokemonList,
                         searchQuery = searchQuery,
+                        isRefreshing = uiState.isRefreshing,
                         onSearchValueChange = onSearchValueChange,
                         navigateToDetails = navigateToPokemonDetails,
                         showSearch = showSearch,
                         onHideSearch = { onShowSearchChange(false) },
+                        onRefresh = onRefresh
                     )
                 }
 
@@ -95,14 +106,17 @@ fun PokemonHomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun PokemonContent(
     pokemonList: List<Pokedex>,
     searchQuery: String,
+    isRefreshing: Boolean,
     onSearchValueChange: (String) -> Unit,
     navigateToDetails: (Int) -> Unit,
     showSearch: Boolean,
     onHideSearch: () -> Unit,
+    onRefresh: () -> Unit
 ) {
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -133,11 +147,13 @@ private fun PokemonContent(
                 title = stringResource(R.string.empty_pokemon)
             )
         } else {
-            LazyVerticalGrid(
+            PullToRefreshLazyGrid(
                 modifier = modifier,
-                columns = GridCells.Fixed(TWO),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.small),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.medium),
+                refreshIndicatorColor = MaterialTheme.colorScheme.primary,
+                isRefreshing = isRefreshing,
+                onRefresh = onRefresh,
             ) {
                 items(items = pokemonList, key = { pokedex -> pokedex.pokemonId }) { pokedex ->
                     PokemonCard(
@@ -182,6 +198,7 @@ private fun PokemonHomeScreenPreview() {
             uiState = PokemonUiState.Success(pokemonList = dummyPokedex),
             searchQuery = searchQuery,
             showSearch = true,
+            snackbarHostState = SnackbarHostState(),
             navigateToPokemonDetails = {}
         )
     }

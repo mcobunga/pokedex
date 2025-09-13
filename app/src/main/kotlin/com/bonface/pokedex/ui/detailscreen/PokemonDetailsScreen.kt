@@ -1,14 +1,15 @@
 package com.bonface.pokedex.ui.detailscreen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -16,38 +17,52 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.bonface.consumerapi.data.model.PokedexDetails
 import com.bonface.designsystem.components.empty.EmptyContainer
 import com.bonface.designsystem.components.loading.FullScreenLoadingIndicator
+import com.bonface.designsystem.components.snackbar.SnackbarContainer
+import com.bonface.designsystem.extensions.customColors
 import com.bonface.designsystem.extensions.dimensions
 import com.bonface.designsystem.theme.PokedexTheme
 import com.bonface.pokedex.R
 import com.bonface.pokedex.viewmodel.PokemonDetailsUiState
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PokemonDetailsScreen(
     uiState: PokemonDetailsUiState,
+    snackbarHostState: SnackbarHostState,
     onRetry: () -> Unit = {},
     onBack: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        when(uiState) {
-            is PokemonDetailsUiState.Success -> {
-                PokemonDetailsContent(
-                    pokedexDetails = uiState.details,
-                    onBack = onBack,
-                )
-            }
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        snackbarHost = {
+            SnackbarContainer(
+                snackbarHostState = snackbarHostState,
+                color = MaterialTheme.customColors.tertiaryBlueBright,
+            )
+        }
+    ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            when(uiState) {
+                is PokemonDetailsUiState.Success -> {
+                    PokemonDetailsContent(
+                        pokedexDetails = uiState.details,
+                        onBack = onBack,
+                    )
+                }
 
-            is PokemonDetailsUiState.Error -> {
-                EmptyContainer(
-                    title = uiState.error.asString(),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = MaterialTheme.dimensions.medium),
-                    buttonText = stringResource(R.string.retry),
-                    buttonOnClick = onRetry
-                )
-            }
+                is PokemonDetailsUiState.Error -> {
+                    EmptyContainer(
+                        title = uiState.error.asString(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = MaterialTheme.dimensions.medium),
+                        buttonText = stringResource(R.string.retry),
+                        buttonOnClick = onRetry
+                    )
+                }
 
-            is PokemonDetailsUiState.Loading -> FullScreenLoadingIndicator()
+                is PokemonDetailsUiState.Loading -> FullScreenLoadingIndicator()
+            }
         }
     }
 }
@@ -107,6 +122,7 @@ private fun PokemonDetailsScreenPreview() {
     PokedexTheme {
         PokemonDetailsScreen(
             uiState = PokemonDetailsUiState.Success(dummyPokedexDetails),
+            snackbarHostState = SnackbarHostState(),
             onBack = {}
         )
     }

@@ -76,7 +76,7 @@ fun SnackbarContainer(
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.small),
             ) {
                 BasicImage(
-                    imagePainter = painterResource(R.drawable.ic_snackbar_check),
+                    imagePainter = painterResource(R.drawable.ic_info_circle),
                     imageConfiguration = ImageConfigurationDefaults.circular(),
                     modifier = Modifier.size(MaterialTheme.dimensions.medium)
                         .background(MaterialTheme.customColors.white, shape = RoundedCornerShape(MaterialTheme.dimensions.large)),
