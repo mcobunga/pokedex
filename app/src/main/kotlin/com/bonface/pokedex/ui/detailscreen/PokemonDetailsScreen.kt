@@ -18,7 +18,6 @@ import com.bonface.consumerapi.data.model.PokedexDetails
 import com.bonface.designsystem.components.empty.EmptyContainer
 import com.bonface.designsystem.components.loading.FullScreenLoadingIndicator
 import com.bonface.designsystem.components.snackbar.SnackbarContainer
-import com.bonface.designsystem.extensions.customColors
 import com.bonface.designsystem.extensions.dimensions
 import com.bonface.designsystem.theme.PokedexTheme
 import com.bonface.pokedex.R
@@ -35,10 +34,7 @@ fun PokemonDetailsScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         snackbarHost = {
-            SnackbarContainer(
-                snackbarHostState = snackbarHostState,
-                color = MaterialTheme.customColors.tertiaryBlueBright,
-            )
+            SnackbarContainer(snackbarHostState = snackbarHostState)
         }
     ) {
         Column(modifier = Modifier.fillMaxSize()) {

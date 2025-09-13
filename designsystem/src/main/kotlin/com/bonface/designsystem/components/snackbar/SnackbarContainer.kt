@@ -53,7 +53,7 @@ import com.bonface.designsystem.components.image.ImageConfigurationDefaults
 fun SnackbarContainer(
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState,
-    color: Color = MaterialTheme.customColors.componentBackground,
+    color: Color = MaterialTheme.customColors.tertiaryOrange,
 ) {
     SnackbarHost(snackbarHostState) { snackbarData ->
         Surface(
