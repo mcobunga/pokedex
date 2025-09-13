@@ -33,25 +33,17 @@ android {
 }
 
 dependencies {
-    //Coroutines
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
-    //Dagger Hilt
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.ksp)
-    //Retrofit
     implementation(libs.retrofit)
-    //OKHTTP
     implementation(libs.okhttp)
-    //Logging Interceptor
     implementation(libs.logging.interceptor)
-    //Moshi
     implementation(libs.moshi)
     ksp(libs.moshi.ksp)
     implementation(libs.moshi.converter)
-    //Timber
     implementation(libs.timber)
-
     testImplementation(libs.junit)
     implementation(libs.junit.ktx)
     testImplementation(libs.mockk)

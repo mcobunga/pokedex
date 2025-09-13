@@ -12,10 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.bonface.pokedex.R
 import com.bonface.pokedex.ui.detailscreen.PokemonDetailsScreen
 import com.bonface.pokedex.ui.homescreen.PokemonHomeScreen
@@ -24,7 +22,7 @@ import com.bonface.pokedex.viewmodel.PokemonDetailsViewModel
 import com.bonface.pokedex.viewmodel.PokemonViewModel
 
 /**
- * Bundles home nav host
+ * Pokedex nav host
  *
  * @param navController
  */
@@ -42,8 +40,8 @@ fun PokedexNavigation(navController: NavHostController) {
             }
         }
 
-        NavHost(navController = navController, startDestination = NavigationRoutes.Home) {
-            composable(route = NavigationRoutes.Home) {
+        NavHost(navController = navController, startDestination = PokemonRoutes.Home.route) {
+            composable(route = PokemonRoutes.Home.route) {
                 val viewModel: PokemonViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
                 val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
@@ -57,7 +55,7 @@ fun PokedexNavigation(navController: NavHostController) {
                     onSearchValueChange = viewModel::onSearchQueryChanged,
                     onShowSearchChange = viewModel::onShowSearchInputChange,
                     navigateToPokemonDetails = { pokemonId ->
-                        navController.navigate(NavigationRoutes.details(pokemonId))
+                        navController.navigate(PokemonRoutes.Details.createRoute(pokemonId))
                     },
                     onRetry = viewModel::getPokemon,
                     onRefresh = viewModel::onPullToRefresh
@@ -65,10 +63,10 @@ fun PokedexNavigation(navController: NavHostController) {
             }
 
             composable(
-                route = NavigationRoutes.DetailsWithArg,
-                arguments = listOf(navArgument("pokemonId") { type = NavType.IntType })
+                route = PokemonRoutes.Details.deepLink,
+                arguments = PokemonRoutes.Details.navArguments
             ) { backStackEntry ->
-                val pokemonId = backStackEntry.arguments?.getInt("pokemonId") ?: return@composable
+                val pokemonId = backStackEntry.arguments?.getInt(POKEDEX_KEY) ?: return@composable
                 val viewModel: PokemonDetailsViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -80,7 +78,7 @@ fun PokedexNavigation(navController: NavHostController) {
                     uiState = uiState,
                     snackbarHostState = snackbarHostState,
                     onRetry = { viewModel.getPokemonDetails(pokemonId) },
-                    onBack = { navController.navigateUp() }
+                    onBack = navController::navigateUp
                 )
             }
         }

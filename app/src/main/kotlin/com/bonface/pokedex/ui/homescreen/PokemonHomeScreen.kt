@@ -33,7 +33,6 @@ import com.bonface.designsystem.components.pulltorefresh.PullToRefreshLazyGrid
 import com.bonface.designsystem.components.scaffold.ScreenScaffoldContainer
 import com.bonface.designsystem.components.search.SearchInputField
 import com.bonface.designsystem.components.snackbar.SnackbarContainer
-import com.bonface.designsystem.extensions.customColors
 import com.bonface.designsystem.extensions.dimensions
 import com.bonface.designsystem.theme.PokedexTheme
 import com.bonface.pokedex.R
@@ -62,10 +61,7 @@ fun PokemonHomeScreen(
         ),
         customPaddingTop = MaterialTheme.dimensions.medium,
         snackbarHost = {
-            SnackbarContainer(
-                snackbarHostState = snackbarHostState,
-                color = MaterialTheme.customColors.tertiaryOrange,
-            )
+            SnackbarContainer(snackbarHostState = snackbarHostState)
         }
     ) {
         Column(
