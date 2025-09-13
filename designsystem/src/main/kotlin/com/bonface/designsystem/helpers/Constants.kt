@@ -3,6 +3,7 @@ package com.bonface.designsystem.helpers
 const val ZERO = 0
 const val ONE = 1
 const val TWO = 2
+const val THREE = 3
 const val EMPTY = ""
 const val ZERO_FLOAT = 0f
 const val SPACE = " "

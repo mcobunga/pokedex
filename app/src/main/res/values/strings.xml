@@ -32,4 +32,6 @@
     <string name="error_disk_full">Failed to save the item because your device\'s disk is full</string>
     <string name="error_serialization">Oops, couldn\'t parse data.</string>
     <string name="search_pokemon">Search pokemon…</string>
+    <string name="no_connection_alert">No internet connection</string>
+    <string name="no_connection_alert_description">Connection lost, please connect to internet</string>
 </resources>

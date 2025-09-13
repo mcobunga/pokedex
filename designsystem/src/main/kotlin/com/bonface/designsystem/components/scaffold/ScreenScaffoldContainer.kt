@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
 import com.bonface.designsystem.components.menu.MenuActionStyle
 import com.bonface.designsystem.components.menu.MenuActionStyleDefaults
 import com.bonface.designsystem.components.modifiers.conditional
@@ -43,8 +44,9 @@ import com.bonface.designsystem.theme.PokedexTheme
  * @param menuActionStyle The style configuration for menu actions.
  * @param rightActions A list of composable functions to define
  *    right-aligned menu actions in the top app bar.
- * @param screenBottomBar A composable lambda defining the content of the
- *    bottom bar in the scaffold.
+ * @param screenBottomBar A composable lambda defining the content of the bottom bar in the scaffold.
+ * @param snackbarHost A composable lambda defining the content of the snackbar host in the scaffold.
+ * @param customPaddingTop An optional [Dp] value specifying the top padding
  * @param content A composable lambda representing the main body content of
  *    the scaffold.
  * @sample com.bonface.designsystem.components.scaffold.ScreenScaffoldContainerPreview
@@ -62,6 +64,8 @@ fun ScreenScaffoldContainer(
     rightActions: List<@Composable (MenuActionStyle) -> Unit> = emptyList(),
     screenBottomBar: @Composable () -> Unit = {},
     useSafeAreaPadding: Boolean = false,
+    customPaddingTop: Dp? = null,
+    snackbarHost: @Composable () -> Unit = {},
     content: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -73,6 +77,7 @@ fun ScreenScaffoldContainer(
                 leftActionProperties = leftActionProperties,
                 menuActionStyle = menuActionStyle,
                 useSafeAreaPadding = useSafeAreaPadding,
+                customPaddingTop = customPaddingTop,
                 rightActions = rightActions,
             )
         },
@@ -83,6 +88,7 @@ fun ScreenScaffoldContainer(
                     .navigationBarsPadding(),
             ) { screenBottomBar() }
         },
+        snackbarHost = snackbarHost,
         containerColor = containerColor,
         modifier = modifier
             .fillMaxSize()
@@ -117,6 +123,7 @@ private fun ScreenTopBar(
     leftActionProperties: LeftActionProperties?,
     menuActionStyle: MenuActionStyle,
     useSafeAreaPadding: Boolean,
+    customPaddingTop: Dp?,
     rightActions: List<@Composable (MenuActionStyle) -> Unit>,
 ) {
     Box {
@@ -125,6 +132,12 @@ private fun ScreenTopBar(
                 .fillMaxWidth()
                 .conditional(useSafeAreaPadding) {
                     safeDrawingPadding()
+                }
+                .let { base ->
+                    when {
+                        customPaddingTop != null -> base.padding(top = customPaddingTop)
+                        else -> base
+                    }
                 },
         ) {
             ScreenHeader(
