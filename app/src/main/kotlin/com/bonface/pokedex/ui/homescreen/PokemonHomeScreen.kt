@@ -54,15 +54,9 @@ fun PokemonHomeScreen(
     ScreenScaffoldContainer(
         screenTitle = stringResource(R.string.title_home),
         leftActionProperties = null,
-        rightActions = searchMenuIcon(
-            showSearch = showSearch,
-            onSearchClick = { onShowSearchChange(true) },
-            onCloseClick = { onShowSearchChange(false) }
-        ),
+        rightActions = searchMenuIcon(showSearch = showSearch, onToggleSearch = onShowSearchChange),
         customPaddingTop = MaterialTheme.dimensions.medium,
-        snackbarHost = {
-            SnackbarContainer(snackbarHostState = snackbarHostState)
-        }
+        snackbarHost = { SnackbarContainer(snackbarHostState = snackbarHostState) }
     ) {
         Column(
             modifier = Modifier

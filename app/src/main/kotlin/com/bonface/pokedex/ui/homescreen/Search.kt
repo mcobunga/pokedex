@@ -1,6 +1,5 @@
 package com.bonface.pokedex.ui.homescreen
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -8,16 +7,14 @@ import androidx.compose.ui.res.stringResource
 import com.bonface.designsystem.components.buttons.ShadowIconButton
 import com.bonface.designsystem.components.menu.MenuActionStyle
 import com.bonface.designsystem.components.menu.MenuActionStyleDefaults
-import com.bonface.designsystem.extensions.dimensions
 import com.bonface.pokedex.R
 
 @Composable
 fun searchMenuIcon(
     showSearch: Boolean,
-    onSearchClick: () -> Unit,
-    onCloseClick: () -> Unit,
+    onToggleSearch: (Boolean) -> Unit,
 ): List<@Composable (MenuActionStyle) -> Unit> {
-    val menuActionStyle = MenuActionStyleDefaults.defaultStyle(iconTint = MaterialTheme.colorScheme.onBackground)
+    val menuActionStyle = MenuActionStyleDefaults.defaultStyle()
     return listOf {
         ShadowIconButton(
             icon = if (showSearch) {
@@ -33,10 +30,7 @@ fun searchMenuIcon(
                 stringResource(R.string.search_pokemon)
             },
             enabled = true,
-            onClick = if (showSearch) onCloseClick else onSearchClick,
-            shadowOffsetX = MaterialTheme.dimensions.none,
-            shadowOffsetY = -MaterialTheme.dimensions.none,
-            shadowBlurRadius = MaterialTheme.dimensions.none,
+            onClick = { onToggleSearch(!showSearch) },
         )
     }
 }
