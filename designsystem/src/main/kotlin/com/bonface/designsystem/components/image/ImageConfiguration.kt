@@ -19,6 +19,6 @@ data class ImageConfiguration(
     val aspectRatio: Float? = null,
     val backgroundColor: Color? = null,
     val shape: Shape = RectangleShape,
-    val contentScale: ContentScale = ContentScale.Crop,
+    val contentScale: ContentScale = ContentScale.Fit,
     val contentPadding: PaddingValues = PaddingValues(),
 )

@@ -79,6 +79,7 @@ fun PokemonCard(
         ) {
             BasicImage(
                 imageUrl = pokedex.imageUrl,
+                contentDescription = pokedex.name,
                 modifier = Modifier.size(dimensionResource(R.dimen.dimen_140))
             )
             Box(modifier = Modifier
